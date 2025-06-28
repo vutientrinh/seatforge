@@ -1,0 +1,22 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+spring:
+  datasource:
+    url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/seatforge}
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:postgres}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+
+bezkoder:
+  app:
+    jwtSecret: ToJ+R/HNV2ER+8J3tK7cD/u3dcPuHfKKuU0E0F5YDaJXz1JoCivzSCuUXQgHttqj
+    jwtExpirationMs: 86400000
+    jwtRefreshExpirationMs: 86400000
