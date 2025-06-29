@@ -10,7 +10,6 @@ import seatforge.seatforge.enums.ENotificationEvent;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
-K
 @Entity
 @Table(name = "notification")
 @Getter

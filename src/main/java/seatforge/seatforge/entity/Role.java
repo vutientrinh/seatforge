@@ -14,7 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RoleEntity {
+public class Role {
     @Id
     @Column(name = "id", nullable = false,columnDefinition = "uuid")
     private UUID id;
