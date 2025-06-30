@@ -1,14 +1,12 @@
 package seatforge.seatforge.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import seatforge.seatforge.enums.EMethod;
 import seatforge.seatforge.enums.EStatusPayment;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -18,16 +16,14 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Payment {
+public class Payment extends Auditable {
     @Id
-    @Column(name = "id", nullable = false,columnDefinition = "uuid")
+    @Column(name = "id", nullable = false, columnDefinition = "uuid")
     private UUID id;
-    private Ticket ticketId;
+    @Column(name = "tickets")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Ticket> ticketId;
     private EMethod method;
     private EStatusPayment statusPayment;
     private String transactionId;
-    private LocalDateTime createAt;
-    private LocalDateTime updateAt;
-
-
 }

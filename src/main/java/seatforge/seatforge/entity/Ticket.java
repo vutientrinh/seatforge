@@ -16,9 +16,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Ticket {
+public class Ticket extends Auditable {
     @Id
-    @Column(name = "id", nullable = false,columnDefinition = "uuid")
+    @Column(name = "id", nullable = false, columnDefinition = "uuid")
     private UUID id;
     @Column(name = "user")
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -28,6 +28,4 @@ public class Ticket {
     private Event eventId;
     private BigDecimal totalAmount;
     private ETicket status;
-    private LocalDateTime createAt;
-    private LocalDateTime updateAt;
 }

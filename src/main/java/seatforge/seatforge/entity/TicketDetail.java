@@ -15,7 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class TicketDetail {
+public class TicketDetail extends Auditable{
     @Id
     @Column(name = "id", nullable = false, columnDefinition = "uuid")
     private UUID id;

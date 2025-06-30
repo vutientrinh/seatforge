@@ -13,7 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
+public class User extends Auditable{
     @Id
     @Column(name = "id", nullable = false, columnDefinition = "uuid")
     private UUID id;
@@ -23,5 +23,4 @@ public class User {
     @Column(name = "role")
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Role role;
-    private LocalDateTime createAt;
 }

@@ -15,7 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Notification {
+public class Notification extends Auditable{
     @Id
     @Column(name = "id", nullable = false, columnDefinition = "uuid")
     private UUID id;
@@ -24,5 +24,4 @@ public class Notification {
     private User userId;
     private ENotificationEvent event;
     private String content;
-    private LocalDateTime createAt;
 }

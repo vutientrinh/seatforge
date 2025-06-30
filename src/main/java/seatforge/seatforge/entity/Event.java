@@ -1,9 +1,6 @@
 package seatforge.seatforge.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -16,18 +13,16 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Event {
+public class Event extends Auditable {
     @Id
-    @Column(name = "id", nullable = false,columnDefinition = "uuid")
+    @Column(name = "id", nullable = false, columnDefinition = "uuid")
     private UUID id;
     private String title;
     private String description;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private String venue;
-
+    @Column(name = "user")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private User createdBy;
-    private LocalDateTime createAt;
-    private LocalDateTime updateAt;
-
 }
