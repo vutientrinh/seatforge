@@ -1,13 +1,11 @@
 package seatforge.seatforge.entity;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -19,10 +17,13 @@ import java.util.UUID;
 @Builder
 public class TicketDetail {
     @Id
-    @Column(name = "id", nullable = false,columnDefinition = "uuid")
+    @Column(name = "id", nullable = false, columnDefinition = "uuid")
     private UUID id;
-
+    @Column(name = "ticket")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Ticket ticketId;
-    private Seat seatId;
+    @Column(name = "seat")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Seat> seatId;
     private BigDecimal price;
 }

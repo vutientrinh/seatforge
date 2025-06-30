@@ -1,9 +1,6 @@
 package seatforge.seatforge.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -18,11 +15,13 @@ import java.util.UUID;
 @Builder
 public class User {
     @Id
-    @Column(name = "id", nullable = false,columnDefinition = "uuid")
+    @Column(name = "id", nullable = false, columnDefinition = "uuid")
     private UUID id;
     private String userName;
     private String email;
     private String password;
+    @Column(name = "role")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Role role;
     private LocalDateTime createAt;
 }

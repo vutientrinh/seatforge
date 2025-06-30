@@ -1,10 +1,7 @@
 package seatforge.seatforge.entity;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import seatforge.seatforge.enums.ETicket;
 
@@ -23,7 +20,11 @@ public class Ticket {
     @Id
     @Column(name = "id", nullable = false,columnDefinition = "uuid")
     private UUID id;
+    @Column(name = "user")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private User userId;
+    @Column(name = "event")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Event eventId;
     private BigDecimal totalAmount;
     private ETicket status;
