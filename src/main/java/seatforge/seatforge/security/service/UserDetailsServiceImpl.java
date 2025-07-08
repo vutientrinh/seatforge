@@ -1,11 +1,15 @@
 package seatforge.seatforge.security.service;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import seatforge.seatforge.entity.User;
 import seatforge.seatforge.repository.UserRepository;
+
+import java.util.Set;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -17,18 +21,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity userEntity =
+        User userEntity =
                 userRepository
                         .findByUsername(username)
                         .orElseThrow(() -> new UsernameNotFoundException("user " + username + " not found"));
 
-        Set<GrantedAuthority> authorities =
-                userEntity.getRoles().stream()
-                        .map(role -> new SimpleGrantedAuthority(role.getName().name()))
-                        .collect(Collectors.toSet());
+        Set<GrantedAuthority> authorities = Set.of(new SimpleGrantedAuthority("ROLE_" + userEntity.getRole().getName()));
+
 
         return UserDetailsImpl.builder()
-                .username(userEntity.getUsername())
+                .username(userEntity.getUserName())
                 .accountNonExpired(true)
                 .accountNonLocked(true)
                 .credentialsNonExpired(true)
