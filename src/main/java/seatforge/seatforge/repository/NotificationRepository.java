@@ -5,5 +5,5 @@ import seatforge.seatforge.entity.Notification;
 
 import java.util.UUID;
 
-public interface NotificationRepostitory extends JpaRepository<Notification, UUID> {
+public interface NotificationRepository extends JpaRepository<Notification, UUID> {
 }
